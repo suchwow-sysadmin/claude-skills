@@ -24,6 +24,8 @@ structure:
 **Important:** The skill file MUST be named `SKILL.md` (all caps), not a
 descriptive name like `after-effects-skill.md`.
 
+Common confusion point: Cursor will display this directory, but otherwise is not visible by default on most systems via the file explorer. Try copy/pasting the SKILL.md contents to a new file within your own IDE instead of moving the file.
+
 #### Installation Example
 
 ```bash
