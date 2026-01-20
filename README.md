@@ -1,4 +1,4 @@
-# Claude Skills Collection
+# Claude Skills + Plugins Collection
 
 A curated collection of specialized skills for Claude Code that extend its
 capabilities across the domain of life - from creative workflows and data
@@ -9,6 +9,21 @@ visualization to automation and beyond.
 Claude skills are specialized knowledge modules that teach Claude Code how to
 handle specific domains, tools, or workflows. They combine domain expertise,
 best practices, and automated workflows into reusable, shareable packages.
+
+## What Are Claude Plugins?
+
+Claude plugins are **code packages** that extend Claude Code with **executable tooling**—most commonly:
+
+- **CLI commands** (e.g. `mem0-pull`, `mem0-push`) that Claude Code can run
+- **Hooks integration** via `.claude/settings.local.json` (e.g. `SessionStart`, `Stop`)
+- **Optional helpers** your project or agents can import/use
+
+In practice, plugins let you wire real automation into your Claude Code workflow (pull context at session start, warn on exit, sync data, run scripts, etc.).
+
+### Plugins vs Skills (Quick Mental Model)
+
+- **Skills**: Documentation-only behavior guides (`SKILL.md`) that teach Claude *how to think and respond* in a domain.
+- **Plugins**: Installable code that lets Claude *do things* (run commands, integrate services, trigger hooks).
 
 ## Installation
 
@@ -41,6 +56,53 @@ cp /path/to/this/repo/after_effects/SKILL.md .claude/skills/ae-expressions/SKILL
 
 Claude Code will automatically detect and load skills from this directory.
 
+### Installing Claude Plugins (Claude Code)
+
+Plugin installation is typically:
+
+1. **Install the package** (usually via npm).
+2. **Configure hooks** (optional, but common) so Claude Code runs the plugin’s commands at key lifecycle events.
+
+Example (from this repo’s Mem0 plugin):
+
+- **Plugin**: [`PLUGIN_claude-code-mem0/`](./PLUGIN_claude-code-mem0/)
+- **Install**:
+
+```bash
+npm install -g claude-code-mem0
+```
+
+- **Hook it into Claude Code** by adding commands to `.claude/settings.local.json` (project) or `~/.claude/settings.local.json` (global). For example, to run on session start / stop, the plugin README uses:
+
+```json
+{
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "npx mem0-pull",
+            "statusMessage": "Loading Mem0 context..."
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "npx mem0-session-end",
+            "statusMessage": "Checking session save status..."
+          }
+        ]
+      }
+    ]
+  }
+}
+```
+
 ### Claude Desktop vs Claude Code
 
 **Claude Desktop** is the standalone application for general AI assistance. For
@@ -71,6 +133,14 @@ Created specifically for data visualization workflows, this skill can:
 
 See the [After Effects README](./after_effects/AE-skill_README.md) for detailed
 capabilities.
+
+## Plugins in This Repository
+
+### [Mem0 Persistent Memory (Claude Code Plugin)](./PLUGIN_claude-code-mem0/)
+
+**Domain:** Workflow automation, session memory
+
+Adds commands + hooks that persist useful context across Claude Code sessions via Mem0.
 
 ---
 

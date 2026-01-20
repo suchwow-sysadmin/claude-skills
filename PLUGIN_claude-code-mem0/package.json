@@ -1,0 +1,37 @@
+{
+  "name": "claude-code-mem0",
+  "version": "1.0.0",
+  "description": "Persistent memory for Claude Code sessions using Mem0",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "bin": {
+    "mem0-pull": "./dist/scripts/pull.js",
+    "mem0-push": "./dist/scripts/push.js",
+    "mem0-session-end": "./dist/scripts/session-end.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "prepublishOnly": "npm run build"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "settings.example.json"
+  ],
+  "keywords": [
+    "claude",
+    "claude-code",
+    "mem0",
+    "memory",
+    "ai",
+    "agent",
+    "persistent-memory"
+  ],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "typescript": "^5.0.0",
+    "@types/node": "^20.0.0"
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "npx mem0-pull",
+            "statusMessage": "Loading Mem0 context..."
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "npx mem0-session-end",
+            "statusMessage": "Checking session save status..."
+          }
+        ]
+      }
+    ]
+  }
+}
