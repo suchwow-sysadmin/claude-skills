@@ -65,12 +65,14 @@ Plugin installation is typically:
 
 Example (from this repo’s Mem0 plugin):
 
-- **Plugin**: [`PLUGIN_claude-code-mem0/`](./PLUGIN_claude-code-mem0/)
+- **Plugin**: [`PLUGINS/mem0/`](./PLUGINS/mem0/)
 - **Install**:
 
 ```bash
 npm install -g claude-code-mem0
 ```
+
+- **Configure**: set `MEM0_API_KEY` in your environment (see the plugin README for details).
 
 - **Hook it into Claude Code** by adding commands to `.claude/settings.local.json` (project) or `~/.claude/settings.local.json` (global). For example, to run on session start / stop, the plugin README uses:
 
@@ -102,6 +104,8 @@ npm install -g claude-code-mem0
   }
 }
 ```
+
+For full usage (saving via `/mem0`, agent scopes via `MEM0_AGENT_IDS`, worktree workflows), see the Mem0 plugin README: [`PLUGINS/mem0/README.md`](./PLUGINS/mem0/README.md).
 
 ### Claude Desktop vs Claude Code
 
@@ -136,11 +140,14 @@ capabilities.
 
 ## Plugins in This Repository
 
-### [Mem0 Persistent Memory (Claude Code Plugin)](./PLUGIN_claude-code-mem0/)
+### [Mem0 Persistent Memory (Claude Code Plugin)](./PLUGINS/mem0/)
 
 **Domain:** Workflow automation, session memory
 
 Adds commands + hooks that persist useful context across Claude Code sessions via Mem0.
+
+- Setup: install `claude-code-mem0`, set `MEM0_API_KEY`, and add Claude Code hooks (`SessionStart` → `mem0-pull`, `Stop` → `mem0-session-end`).
+- Docs: see [`PLUGINS/mem0/README.md`](./PLUGINS/mem0/README.md) for the full workflow, including `/mem0` saves, agent scopes, and worktree patterns.
 
 ---
 
